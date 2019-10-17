@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "127560097218",
+    "firebase_url": "https://propertyapp-dce67.firebaseio.com",
+    "project_id": "propertyapp-dce67",
+    "storage_bucket": "propertyapp-dce67.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127560097218:android:05ed9b4263661efbf98a5b",
+        "android_client_info": {
+          "package_name": "com.suman.propertyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127560097218-tqbvaa86vmea7fv41mt9g4knotd02ph9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5FoBA1H08FZiIi7_F_mbDQGWG7dyjYJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127560097218-tqbvaa86vmea7fv41mt9g4knotd02ph9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
