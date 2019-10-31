@@ -18,7 +18,7 @@ class CircleButton extends Component {
             backgroundColor: this.props.backgroundColor,
           }}>
           <Icon
-            name={this.props.name || 'ios-person'}
+            name={this.props.name || 'person'}
             style={{...styles.icon, color: this.props.color}}></Icon>
         </Button>
         {this.props.title ? <Text>{this.props.title}</Text> : null}

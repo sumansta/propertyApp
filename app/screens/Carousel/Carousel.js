@@ -25,11 +25,21 @@ import {
   CarouselBackgroundView,
 } from './style';
 
-class Favourite extends Component {
+class CarouselSc extends Component {
   constructor(props) {
     super();
     this.state = {
       loading: true,
+      images: [
+        {
+          imageURL:
+            'https://cdn.pixabay.com/photo/2017/04/24/13/37/architecture-2256489_960_720.jpg',
+        },
+        {
+          imageURL:
+            'https://images.unsplash.com/photo-1462396240927-52058a6a84ec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=666&q=80',
+        },
+      ],
     };
     this.props = props;
     this._carousel = {};
@@ -41,7 +51,7 @@ class Favourite extends Component {
 
   async fetch() {
     // try {
-    //   const response = await fetchFavourites();
+    //   const response = await fetchCarousels();
     //   if (response) {
     //     this.props.saveFavourites(response.data);
     //     this.setState({loading: false});
@@ -72,7 +82,6 @@ class Favourite extends Component {
   };
 
   render = () => {
-    console.log(this.props);
     return this.state.loading ? (
       <View
         style={{
@@ -85,21 +94,22 @@ class Favourite extends Component {
         <ActivityIndicator />
       </View>
     ) : (
-      <View></View>
-      // <CarouselBackgroundView>
-      //   <Carousel
-      //     ref={c => {
-      //       this._carousel = c;
-      //     }}
-      //     data={this.props.favourites}
-      //     renderItem={this._renderItem.bind(this)}
-      //     onSnapToItem={this.handleSnapToItem.bind(this)}
-      //     sliderWidth={Dimensions.get('window').width}
-      //     itemWidth={Dimensions.get('window').width}
-      //     layout={'default'}
-      //     firstItem={0}
-      //   />
-      // </CarouselBackgroundView>
+      <View>
+        <CarouselBackgroundView>
+          <Carousel
+            ref={c => {
+              this._carousel = c;
+            }}
+            data={this.state.images}
+            renderItem={this._renderItem.bind(this)}
+            onSnapToItem={this.handleSnapToItem.bind(this)}
+            sliderWidth={Dimensions.get('window').width}
+            itemWidth={Dimensions.get('window').width}
+            layout={'default'}
+            firstItem={0}
+          />
+        </CarouselBackgroundView>
+      </View>
     );
   };
 }
@@ -107,4 +117,4 @@ class Favourite extends Component {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Favourite);
+)(CarouselSc);

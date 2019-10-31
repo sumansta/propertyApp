@@ -1,19 +1,162 @@
 {
-  "posts": [
+  "favourites": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "price": "1.304,000",
+      "address": "13 St George Street Toronto",
+      "distanceTo": {
+        "trainStation": 4.5,
+        "security": 4.8,
+        "park": 4.1
+      },
+      "description": "Do you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremely",
+      "imageURL": "https://cdn.pixabay.com/photo/2017/04/24/13/37/architecture-2256489_960_720.jpg"
+    },
+    {
+      "id": 2,
+      "price": "2000,000",
+      "address": "14 Downtown Avenue",
+      "distanceTo": {
+        "trainStation": 4.5,
+        "security": 4.8,
+        "park": 4.1
+      },
+      "description": "Do you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremely",
+      "imageURL": "https://images.unsplash.com/photo-1462396240927-52058a6a84ec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=666&q=80"
+    },
+    {
+      "id": 3,
+      "price": "3000,010",
+      "address": "11 Downing Street",
+      "distanceTo": {
+        "trainStation": 4.5,
+        "security": 4.8,
+        "park": 4.1
+      },
+      "description": "Do you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremely",
+      "imageURL": "https://images.unsplash.com/photo-1494145904049-0dca59b4bbad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
     }
   ],
-  "comments": [
+  "bestPicks": [
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "heading": "Smart Houses",
+      "description": "23 houses and apartments",
+      "icon": "home",
+      "priceDetail": {
+        "price": "3000,010",
+        "address": "11 Downing Street",
+        "distanceTo": {
+          "trainStation": 4.5,
+          "security": 4.8,
+          "park": 4.1
+        }
+      },
+      "details": "Do you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremely",
+      "imageURL": "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=746&q=80",
+      "features": [
+        { "title": "Map View", "icon": "map", "color": "" },
+        { "title": "Transport", "icon": "directions-bus", "color": "" },
+        { "title": "Safety", "icon": "security", "color": "" },
+        { "title": "Ecology", "icon": "local-hospital", "color": "" },
+        { "title": "Geology", "icon": "school", "color": "" },
+        { "title": "Biology", "icon": "home", "color": "" }
+      ],
+      "info": {
+        "bed": 2,
+        "bath": 2,
+        "area": 445
+      }
+    },
+    {
+      "id": 2,
+      "heading": "Smart Houses",
+      "description": "23 houses and apartments",
+      "icon": "airplanemode-active",
+      "priceDetail": {
+        "price": "3000,010",
+        "address": "11 Downing Street",
+        "distanceTo": {
+          "trainStation": 4.5,
+          "security": 4.8,
+          "park": 4.1
+        }
+      },
+      "details": "Do you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremely",
+      "imageURL": "https://images.unsplash.com/photo-1545922016-87c93aaca2ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&q=80",
+      "features": [
+        { "title": "Map View", "icon": "map" },
+        { "title": "Transport", "icon": "directions-bus" },
+        { "title": "Safety", "icon": "security" },
+        { "title": "Ecology", "icon": "local-hospital" },
+        { "title": "Geology", "icon": "school" },
+        { "title": "Biology", "icon": "home" }
+      ],
+      "info": {
+        "bed": 2,
+        "bath": 2,
+        "area": 445
+      }
+    },
+    {
+      "id": 3,
+      "heading": "Smart Cities",
+      "description": "XXXXXXXXXXXXXxx",
+      "icon": "local-cafe",
+      "priceDetail": {
+        "price": "3000,010",
+        "address": "11 Downing Street",
+        "distanceTo": {
+          "trainStation": 4.5,
+          "security": 4.8,
+          "park": 4.1
+        }
+      },
+      "details": "Do you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremely",
+      "imageURL": "https://images.unsplash.com/photo-1541796408240-af1f35c2af6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
+      "features": [
+        { "title": "Map View", "icon": "map" },
+        { "title": "Transport", "icon": "directions-bus" },
+        { "title": "Safety", "icon": "security" },
+        { "title": "Ecology", "icon": "local-hospital" },
+        { "title": "Geology", "icon": "school" },
+        { "title": "Biology", "icon": "home" }
+      ],
+      "info": {
+        "bed": 2,
+        "bath": 2,
+        "area": 445
+      }
+    },
+    {
+      "id": 4,
+      "heading": "Smart Houses",
+      "description": "23 houses and apartments",
+      "icon": "home",
+      "priceDetail": {
+        "price": "3000,010",
+        "address": "11 Downing Street",
+        "distanceTo": {
+          "trainStation": 4.5,
+          "security": 4.8,
+          "park": 4.1
+        }
+      },
+      "details": "Do you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremely",
+      "imageURL": "https://images.unsplash.com/photo-1541796408240-af1f35c2af6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
+      "features": [
+        { "title": "Map View", "icon": "map" },
+        { "title": "Transport", "icon": "directions-bus" },
+        { "title": "Safety", "icon": "security" },
+        { "title": "Ecology", "icon": "local-hospital" },
+        { "title": "Geology", "icon": "school" },
+        { "title": "Biology", "icon": "home" }
+      ],
+      "info": {
+        "bed": 2,
+        "bath": 2,
+        "area": 445
+      }
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

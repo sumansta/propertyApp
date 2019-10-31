@@ -10,10 +10,28 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import AppStyles from '../config/styles';
 
 import HomeScreen from '../screens/Home';
-import DiscoveryScreen from '../screens/Discovery';
+import DiscoverScreen from '../screens/Discover';
 import FavouriteScreen from '../screens/Favourite';
 import ScheduleScreen from '../screens/Schedule';
 import DetailsScreen from '../screens/Details';
+import CarouselScreen from '../screens/Carousel';
+
+const DetailsScreenStack = createStackNavigator(
+  {
+    DetailsScreen: {
+      screen: DetailsScreen,
+    },
+    CarouselScreen: {
+      screen: CarouselScreen,
+    },
+  },
+  {
+    initialRouteKey: DetailsScreen,
+    defaultNavigationOptions: {
+      header: null,
+    },
+  },
+);
 
 const HomeScreenStack = createStackNavigator(
   {
@@ -23,7 +41,7 @@ const HomeScreenStack = createStackNavigator(
         header: null,
       },
     },
-    DetailsScreen: {screen: DetailsScreen},
+    DetailsScreen: {screen: DetailsScreenStack},
   },
   {
     initialRouteKey: HomeScreen,
@@ -52,8 +70,8 @@ const bottomNavigator = createMaterialBottomTabNavigator(
         ),
       },
     },
-    Discovery: {
-      screen: DiscoveryScreen,
+    Discover: {
+      screen: DiscoverScreen,
       navigationOptions: {
         tabBarLabel: 'Discover',
         tabBarIcon: ({tintColor}) => (

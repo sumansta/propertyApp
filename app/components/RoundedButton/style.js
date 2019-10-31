@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
   button: {
     elevation: 10,
     backgroundColor: '#fff',
+    height: 32,
   },
   text: {
     color: '#88898c',

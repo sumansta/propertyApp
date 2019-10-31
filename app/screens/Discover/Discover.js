@@ -10,7 +10,7 @@ import RangeSlider from '../../components/RangeSlider';
 import RoundedButton from '../../components/RoundedButton';
 import PropertyButton from '../../components/PropertyButton';
 
-class Schedule extends Component {
+class Discover extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,7 +28,7 @@ class Schedule extends Component {
     };
   }
   static navigationOptions = {
-    title: 'Schedule',
+    title: 'Discover',
   };
 
   componentDidMount() {
@@ -94,10 +94,7 @@ class Schedule extends Component {
       <Text>SS</Text>
     ) : (
       <Container>
-        <HeadingText
-          title="Rent Duration"
-          style={{color: AppStyles.color.DEFAULT_ORANGE}}
-        />
+        <HeadingText title="Rent Duration" />
         <HeadingText title="Price" />
         <RangeSlider
           data={{
@@ -133,7 +130,7 @@ class Schedule extends Component {
               backgroundColor: AppStyles.color.DEFAULT_BLUE,
               color: AppStyles.color.DEFAULT_WHITE,
             }}
-            title="APPLy"
+            title="Apply"
           />
         </ButtonsContainer>
       </Container>
@@ -141,4 +138,4 @@ class Schedule extends Component {
   }
 }
 
-export default Schedule;
+export default Discover;

@@ -9,12 +9,12 @@
   },
   "dependencies": {
     "@ptomasroos/react-native-multi-slider": "^1.0.0",
-    "@react-native-firebase/app": "^6.0.1",
     "axios": "^0.19.0",
     "lodash": "^4.17.15",
     "react": "16.8.6",
     "react-native": "0.60.5",
     "react-native-easy-toast": "^1.2.0",
+    "react-native-firebase": "^5.5.6",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-paper": "^2.16.0",
     "react-native-range-slider": "^0.1.2",

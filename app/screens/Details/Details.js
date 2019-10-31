@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Image, ScrollView} from 'react-native';
+import {Image, TouchableOpacity, ScrollView} from 'react-native';
 import {ProgressDialog} from 'react-native-simple-dialogs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Toast from 'react-native-easy-toast';
@@ -79,13 +79,17 @@ class Details extends Component {
           {!this.state.loading && (
             <ScrollView nestedScrollEnabled={true}>
               <TopContainer>
-                <ImageContainer>
+                <ImageContainer
+                  onPress={() => {
+                    this.props.navigation.navigate('CarouselScreen');
+                  }}>
                   <Image
                     source={{uri: this.state.details.imageURL}}
                     style={styles.image}
                     resizeMode="cover"
                   />
                 </ImageContainer>
+
                 <MapContainer>
                   <MapView></MapView>
                   <MapDetails>

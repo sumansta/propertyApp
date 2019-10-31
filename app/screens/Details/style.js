@@ -30,7 +30,7 @@ export const DetailsContainer = styled.View`
   padding-horizontal: 24px;
 `;
 
-export const ImageContainer = styled.View`
+export const ImageContainer = styled.TouchableOpacity`
     position:absolute
     width:100%
     height:240

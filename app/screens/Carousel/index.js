@@ -1,3 +1,3 @@
-import Favourite from './Favourite';
+import Carousel from './Carousel';
 
-export default Favourite;
+export default Carousel;
