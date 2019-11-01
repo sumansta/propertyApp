@@ -54,9 +54,9 @@ const styles = StyleSheet.create({
     elevation: 12,
   },
   buttonContainer: {
-    flex: 1,
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
+    // flex: 1,
+    // flexWrap: 'wrap',
+    // justifyContent: 'flex-start',
     padding: 4,
     flexDirection: 'row',
     marginBottom: 8,

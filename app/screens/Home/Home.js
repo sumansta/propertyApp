@@ -3,13 +3,14 @@ import {View, Text, ScrollView, RefreshControl} from 'react-native';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {ProgressDialog} from 'react-native-simple-dialogs';
-import Toast from 'react-native-easy-toast';
 
 import {fetchBestPicks} from '../../api/property';
 import {saveBestPicks, markFavourites} from '../../store/actions';
 
 import CardView from '../../components/CardView';
 import RoundedButton from '../../components/RoundedButton';
+
+import ToastExample from '../../utils/CustomToast';
 
 import styles, {Container} from './style';
 
@@ -28,7 +29,7 @@ class Home extends Component {
 
   handleFavourite(item) {
     this.props.markFavourites(item);
-    this.toast.show('Added to favourites');
+    ToastExample.show('Added to favourites', ToastExample.SHORT);
   }
 
   async fetch() {
@@ -52,14 +53,6 @@ class Home extends Component {
   render() {
     return (
       <Container>
-        <Toast
-          fadeInDuration={750}
-          fadeOutDuration={1000}
-          style={{bottom: 64}}
-          ref={toast => {
-            this.toast = toast;
-          }}
-        />
         <ProgressDialog
           visible={this.state.loading}
           title="Loading"
@@ -97,10 +90,15 @@ class Home extends Component {
               ))}
             </ScrollView>
             <View style={styles.buttonContainer}>
-              <RoundedButton title="Top Seller" />
-              <RoundedButton />
-              <RoundedButton title="School" />
-              <RoundedButton title="Cultural Space" />
+              <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{flexDirection: 'row'}}>
+                <RoundedButton title="Top Seller" />
+                <RoundedButton />
+                <RoundedButton title="School" />
+                <RoundedButton title="Cultural Space" />
+              </ScrollView>
             </View>
             <Text style={styles.headingText}>Trending</Text>
             <ScrollView

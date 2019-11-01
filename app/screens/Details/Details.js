@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {Image, TouchableOpacity, ScrollView} from 'react-native';
+import {Image, ScrollView} from 'react-native';
 import {ProgressDialog} from 'react-native-simple-dialogs';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Toast from 'react-native-easy-toast';
 
 import CircleButtons from '../../components/CircleButton';
 import PropertyButton from '../../components/PropertyButton';
@@ -70,7 +69,6 @@ class Details extends Component {
     return (
       !this.state.networkError && (
         <Container>
-          <Toast ref="toast" />
           <ProgressDialog
             visible={this.state.loading}
             title="Loading"

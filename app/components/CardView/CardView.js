@@ -63,7 +63,9 @@ class CardView extends React.Component {
   render() {
     return (
       <View>
-        <TouchableOpacity onPress={() => this.props.handleNavigation()}>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => this.props.handleNavigation()}>
           <View style={{...styles.cardView, ...this.props.style}}>
             <FavouriteButton
               onPress={() => {

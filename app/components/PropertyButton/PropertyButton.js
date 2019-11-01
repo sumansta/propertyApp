@@ -9,7 +9,9 @@ class PropertyButton extends Component {
   }
   render() {
     return (
-      <TouchableOpacity style={this.getStyle()} onPress={() => {}}>
+      <TouchableOpacity
+        style={this.getStyle()}
+        onPress={this.props.handleClick}>
         <Text style={{...styles.text, color: this.props.style.color}}>
           {this.props.title
             ? String(this.props.title).toUpperCase()

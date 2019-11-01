@@ -7,19 +7,15 @@ class RoundedButton extends Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     return (
       <Button
         style={{
           ...styles.button,
-          backgroundColor:
-            this.props.status == 'active'
-              ? AppStyles.color.DEFAULT_ORANGE
-              : this.props.status == 'inactive'
-              ? AppStyles.color.INACTIVE_BUTTON_COLOR
-              : AppStyles.color.DEFAULT_WHITE,
+          backgroundColor: this.props.color || AppStyles.color.DEFAULT_WHITE,
         }}
-        onPress={() => {}}>
+        onPressIn={this.props.handleClick}>
         <Text
           style={{
             ...styles.text,

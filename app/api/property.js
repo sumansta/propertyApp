@@ -13,6 +13,6 @@ export const fetchDetails = async id => {
   try {
     return await axios.get(urlConstants.DETAILS + id);
   } catch (e) {
-    console.log(e + '333333333333333333333');
+    console.log(e);
   }
 };

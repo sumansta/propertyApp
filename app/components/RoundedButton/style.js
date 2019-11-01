@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   button: {
-    elevation: 10,
+    elevation: 8,
     backgroundColor: '#fff',
     height: 32,
   },
@@ -21,7 +21,7 @@ export const Button = styled.TouchableOpacity`
     padding-vertical:12px
     padding-horizontal:16px
     margin-horizontal:4px
-    margin-top:10px
+    margin-vertical:8px
     `;
 
 export const Text = styled.Text``;

@@ -6,7 +6,7 @@ import styles, {View} from './style';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import AppStyles from '../../config/styles';
 
-class RangeSlider extends Component {
+class SingleSlider extends Component {
   constructor(props) {
     super(props);
   }
@@ -16,16 +16,14 @@ class RangeSlider extends Component {
       <ScrollView scrollEnabled={true} contentContainerStyle={styles.container}>
         <MultiSlider
           sliderLength={0.8 * Dimensions.get('window').width}
-          values={this.props.data.values || [1000, 10000]}
-          step={this.props.data.step || 1000}
+          values={this.props.data.values || [1000]}
           min={this.props.data.min || 1000}
           max={this.props.data.max || 10000}
           selectedStyle={{
             backgroundColor:
               this.props.data.color || AppStyles.color.DEFAULT_ORANGE,
           }}
-          isMarkersSeparated={true}
-          customMarkerLeft={e => {
+          customMarker={e => {
             return (
               <Marker
                 currentValue={e.currentValue}
@@ -33,17 +31,8 @@ class RangeSlider extends Component {
               />
             );
           }}
-          customMarkerRight={e => {
-            return (
-              <Marker
-                currentValue={e.currentValue}
-                color={this.props.data.color || AppStyles.color.DEFAULT_ORANGE}
-              />
-            );
-          }}
-          onValuesChangeStart={start => {}}
           onValuesChangeFinish={finish => {
-            this.props.setPrice(finish);
+            this.props.setValue(finish);
           }}
         />
       </ScrollView>
@@ -63,7 +52,7 @@ const Marker = props => {
           color: AppStyles.color.NORMAL_TEXT_COLOR,
           fontSize: 12,
         }}>
-        ${props.currentValue}
+        {props.currentValue} m
       </Text>
       <View
         style={{
@@ -77,4 +66,4 @@ const Marker = props => {
   );
 };
 
-export default RangeSlider;
+export default SingleSlider;
