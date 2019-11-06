@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {Dimensions} from 'react-native';
 
 import AppStyles from '../../config/styles';
 
@@ -78,8 +79,6 @@ export const ButtonsContainer = styled.View`
     flex-direction:row
     position:absolute
     margin-top:695
-    opacity:0.8
-    background-color:${AppStyles.color.DEFAULT_WHITE}
 `;
 
 export const Text = styled.Text`

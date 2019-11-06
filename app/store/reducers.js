@@ -1,8 +1,14 @@
-import {SAVE_FAVOURITES, SAVE_BEST_PICKS, MARK_FAVOUTITES} from './actions';
+import {
+  SAVE_FAVOURITES,
+  SAVE_BEST_PICKS,
+  MARK_FAVOUTITES,
+  SAVE_LOGIN,
+} from './actions';
 
 const INITIAL_STATE = {
   favourites: [],
   bestPicks: [],
+  loggedIn: false,
 };
 
 const rootReducer = (state = INITIAL_STATE, action) => {
@@ -13,6 +19,8 @@ const rootReducer = (state = INITIAL_STATE, action) => {
       return {...state, bestPicks: action.data};
     case MARK_FAVOUTITES:
       return {...state, favourites: action.data};
+    case SAVE_LOGIN:
+      return {...state, loggedIn: action.data};
     default:
       return state;
   }

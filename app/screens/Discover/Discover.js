@@ -68,7 +68,7 @@ class Discover extends Component {
       let borderLeft = i == 0 ? 10 : 0;
       let borderRight = i == 4 ? 10 : 0;
       slides.push(
-        <View>
+        <View key={i}>
           <RentDurationRange
             activeOpacity={1}
             style={{

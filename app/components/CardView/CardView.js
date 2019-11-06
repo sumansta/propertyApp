@@ -73,7 +73,7 @@ class CardView extends React.Component {
                 this.props.showToast();
               }}>
               <Icon
-                name={this.state.favouriteIcon}
+                name={this.props.favourite ? 'star' : 'star-border'}
                 style={{
                   fontSize: 32,
                   color: AppStyles.color.DEFAULT_ORANGE,

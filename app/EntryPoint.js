@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {AsyncStorage} from 'react-native';
 import {Provider} from 'react-redux';
 
 import {persistor, store} from './store/index';
@@ -17,6 +18,7 @@ class EntryPoint extends Component {
       .hasPermission()
       .then(hasPermission => {
         if (hasPermission) {
+          this.getToken();
           this.subscribeToNotificationListeners();
         } else {
           firebase
@@ -30,6 +32,16 @@ class EntryPoint extends Component {
             });
         }
       });
+  }
+
+  async getToken() {
+    let fcmToken = await AsyncStorage.getItem('fcmToken');
+    if (!fcmToken) {
+      fcmToken = await firebase.messaging().getToken();
+      if (fcmToken) {
+        await AsyncStorage.setItem('fcmToken', fcmToken);
+      }
+    }
   }
 
   subscribeToNotificationListeners() {

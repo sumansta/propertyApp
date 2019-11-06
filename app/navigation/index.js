@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 
-import {createAppContainer} from 'react-navigation';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
 import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
@@ -9,12 +9,16 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import AppStyles from '../config/styles';
 
+import Login from '../screens/Login';
 import HomeScreen from '../screens/Home';
 import DiscoverScreen from '../screens/Discover';
 import FavouriteScreen from '../screens/Favourite';
 import ScheduleScreen from '../screens/Schedule';
 import DetailsScreen from '../screens/Details';
 import CarouselScreen from '../screens/Carousel';
+import ProfileScreen from '../screens/Profile';
+
+import RegisterStack from './RegisterStack';
 
 const DetailsScreenStack = createStackNavigator(
   {
@@ -57,7 +61,7 @@ const HomeScreenStack = createStackNavigator(
   },
 );
 
-const bottomNavigator = createMaterialBottomTabNavigator(
+const bottomNavigatorStack = createMaterialBottomTabNavigator(
   {
     Home: {
       screen: HomeScreenStack,
@@ -103,6 +107,17 @@ const bottomNavigator = createMaterialBottomTabNavigator(
         ),
       },
     },
+    Profile: {
+      screen: ProfileScreen,
+      navigationOptions: {
+        tabBarLabel: 'Profile',
+        tabBarIcon: ({tintColor}) => (
+          <View>
+            <Icon style={[{color: tintColor}]} size={25} name={'ios-person'} />
+          </View>
+        ),
+      },
+    },
   },
   {
     initialRouteName: 'Home',
@@ -112,6 +127,17 @@ const bottomNavigator = createMaterialBottomTabNavigator(
   },
 );
 
-const App = createAppContainer(bottomNavigator);
+const NavigationStack = createSwitchNavigator(
+  {
+    Auth: Login,
+    Dashboard: bottomNavigatorStack,
+    Register: RegisterStack,
+  },
+  {
+    initialRouteName: 'Auth',
+  },
+);
+
+const App = createAppContainer(NavigationStack);
 
 export default App;

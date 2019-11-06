@@ -55,12 +55,12 @@
       "details": "Do you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremely",
       "imageURL": "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=746&q=80",
       "features": [
-        { "title": "Map View", "icon": "map", "color": "" },
-        { "title": "Transport", "icon": "directions-bus", "color": "" },
-        { "title": "Safety", "icon": "security", "color": "" },
-        { "title": "Ecology", "icon": "local-hospital", "color": "" },
-        { "title": "Geology", "icon": "school", "color": "" },
-        { "title": "Biology", "icon": "home", "color": "" }
+        {"title": "Map View", "icon": "map", "color": ""},
+        {"title": "Transport", "icon": "directions-bus", "color": ""},
+        {"title": "Safety", "icon": "security", "color": ""},
+        {"title": "Ecology", "icon": "local-hospital", "color": ""},
+        {"title": "Geology", "icon": "school", "color": ""},
+        {"title": "Biology", "icon": "home", "color": ""}
       ],
       "info": {
         "bed": 2,
@@ -85,12 +85,12 @@
       "details": "Do you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremely",
       "imageURL": "https://images.unsplash.com/photo-1545922016-87c93aaca2ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&q=80",
       "features": [
-        { "title": "Map View", "icon": "map" },
-        { "title": "Transport", "icon": "directions-bus" },
-        { "title": "Safety", "icon": "security" },
-        { "title": "Ecology", "icon": "local-hospital" },
-        { "title": "Geology", "icon": "school" },
-        { "title": "Biology", "icon": "home" }
+        {"title": "Map View", "icon": "map"},
+        {"title": "Transport", "icon": "directions-bus"},
+        {"title": "Safety", "icon": "security"},
+        {"title": "Ecology", "icon": "local-hospital"},
+        {"title": "Geology", "icon": "school"},
+        {"title": "Biology", "icon": "home"}
       ],
       "info": {
         "bed": 2,
@@ -101,7 +101,7 @@
     {
       "id": 3,
       "heading": "Smart Cities",
-      "description": "XXXXXXXXXXXXXxx",
+      "description": "A description about smart",
       "icon": "local-cafe",
       "priceDetail": {
         "price": "3000,010",
@@ -115,12 +115,12 @@
       "details": "Do you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremely",
       "imageURL": "https://images.unsplash.com/photo-1541796408240-af1f35c2af6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
       "features": [
-        { "title": "Map View", "icon": "map" },
-        { "title": "Transport", "icon": "directions-bus" },
-        { "title": "Safety", "icon": "security" },
-        { "title": "Ecology", "icon": "local-hospital" },
-        { "title": "Geology", "icon": "school" },
-        { "title": "Biology", "icon": "home" }
+        {"title": "Map View", "icon": "map"},
+        {"title": "Transport", "icon": "directions-bus"},
+        {"title": "Safety", "icon": "security"},
+        {"title": "Ecology", "icon": "local-hospital"},
+        {"title": "Geology", "icon": "school"},
+        {"title": "Biology", "icon": "home"}
       ],
       "info": {
         "bed": 2,
@@ -145,12 +145,12 @@
       "details": "Do you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremelyDo you find apartments dressed in an elegant fashion extremely",
       "imageURL": "https://images.unsplash.com/photo-1541796408240-af1f35c2af6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60",
       "features": [
-        { "title": "Map View", "icon": "map" },
-        { "title": "Transport", "icon": "directions-bus" },
-        { "title": "Safety", "icon": "security" },
-        { "title": "Ecology", "icon": "local-hospital" },
-        { "title": "Geology", "icon": "school" },
-        { "title": "Biology", "icon": "home" }
+        {"title": "Map View", "icon": "map"},
+        {"title": "Transport", "icon": "directions-bus"},
+        {"title": "Safety", "icon": "security"},
+        {"title": "Ecology", "icon": "local-hospital"},
+        {"title": "Geology", "icon": "school"},
+        {"title": "Biology", "icon": "home"}
       ],
       "info": {
         "bed": 2,

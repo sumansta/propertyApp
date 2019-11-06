@@ -1,123 +1,94 @@
-import React, {Component} from 'react';
-import {View, Text, ScrollView, RefreshControl} from 'react-native';
+import React, {useState, useEffect, useCallback} from 'react';
+import {View, Text, ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {ProgressDialog} from 'react-native-simple-dialogs';
+import firebase from 'react-native-firebase';
 
-import {fetchBestPicks} from '../../api/property';
 import {saveBestPicks, markFavourites} from '../../store/actions';
 
 import CardView from '../../components/CardView';
-import RoundedButton from '../../components/RoundedButton';
+import FeatureButtons from '../../components/FeatureButtons';
 
 import ToastExample from '../../utils/CustomToast';
 
 import styles, {Container} from './style';
 
-class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true,
-      refreshing: false,
-    };
-  }
+const Home = ({navigation}) => {
+  const ref = firebase.firestore().collection('bestPicks');
+  const [bestPicks, setBestPicks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  componentDidMount() {
-    this.fetch();
-  }
+  const toggleFavourite = async ({id, favourite}) => {
+    let toastMessage = favourite
+      ? 'Removed from favourites'
+      : 'Added to Favourites';
+    ToastExample.show(toastMessage, ToastExample.SHORT);
+    await ref.doc(id).update({favourite: !favourite});
+  };
 
-  handleFavourite(item) {
-    this.props.markFavourites(item);
-    ToastExample.show('Added to favourites', ToastExample.SHORT);
-  }
+  useEffect(() => {
+    return ref.onSnapshot(querySnapshot => {
+      const list = [];
+      querySnapshot.forEach(doc => {
+        const data = doc.data();
+        list.push({...data, id: doc.id});
+      });
+      setLoading(false);
+      setBestPicks(list);
+    });
+  }, []);
 
-  async fetch() {
-    try {
-      const response = await fetchBestPicks();
-      if (response) {
-        this.props.saveBestPicks(response.data);
-        this.setState({loading: false});
-      }
-    } catch (e) {
-      this.setState({loading: false});
-    }
-  }
-
-  async refreshPage() {
-    this.setState({refreshing: true});
-    await this.fetch();
-    this.setState({refreshing: false});
-  }
-
-  render() {
-    return (
-      <Container>
-        <ProgressDialog
-          visible={this.state.loading}
-          title="Loading"
-          message="Fetching data"
-        />
-        <ScrollView
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this.refreshPage}
-            />
-          }>
-          <Container style={styles.mainView}>
-            <Text style={styles.headingText}>Best Picks</Text>
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}>
-              {this.props.bestPicks.map(item => (
-                <CardView
-                  key={item.id}
-                  handleNavigation={() => {
-                    this.props.navigation.navigate('DetailsScreen', {
-                      id: item.id,
-                      title: item.heading,
-                    });
-                  }}
-                  showToast={() => {
-                    this.handleFavourite(item);
-                  }}
-                  image={{uri: item.imageURL}}
-                  iconName={item.icon}
-                  title={item.heading}
-                  description={item.description}
-                />
-              ))}
-            </ScrollView>
-            <View style={styles.buttonContainer}>
-              <ScrollView
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{flexDirection: 'row'}}>
-                <RoundedButton title="Top Seller" />
-                <RoundedButton />
-                <RoundedButton title="School" />
-                <RoundedButton title="Cultural Space" />
-              </ScrollView>
-            </View>
-            <Text style={styles.headingText}>Trending</Text>
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}>
-              {/* <CardView iconName="ios-compass" image={images.image2} />
+  return (
+    <Container>
+      <ProgressDialog
+        visible={loading}
+        title="Loading"
+        message="Fetching data"
+      />
+      <ScrollView>
+        <Container style={styles.mainView}>
+          <Text style={styles.headingText}>Best Picks</Text>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {bestPicks.map(item => (
+              <CardView
+                favourite={item.favourite}
+                key={item.id}
+                handleNavigation={() => {
+                  navigation.navigate('DetailsScreen', {
+                    id: item.id,
+                    title: item.heading,
+                  });
+                }}
+                showToast={() => {
+                  toggleFavourite(item);
+                }}
+                image={{uri: item.imageURL}}
+                iconName={item.icon}
+                title={item.heading}
+                description={item.description}
+              />
+            ))}
+          </ScrollView>
+          <View style={styles.buttonContainer}>
+            <FeatureButtons />
+          </View>
+          <Text style={styles.headingText}>Trending</Text>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {/* <CardView iconName="ios-compass" image={images.image2} />
               <CardView image={images.image3} />
               <CardView iconName="ios-home" image={images.image4} /> */}
-            </ScrollView>
-          </Container>
-        </ScrollView>
-      </Container>
-    );
-  }
-}
+          </ScrollView>
+        </Container>
+      </ScrollView>
+    </Container>
+  );
+};
 
 const mapStateToProps = state => {
   return {
     bestPicks: state.bestPicks,
+    loggedIn: state.loggedIn,
   };
 };
 

@@ -1,19 +1,13 @@
 import React, {Component} from 'react';
+import {CameraRoll, View} from 'react-native';
 
-import {View} from './style';
-
-class Schedule extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+export default class Schedule extends Component {
+  componentDidMount() {
+    CameraRoll.getPhotos({first: 1}, data => {
+      console.log(data);
+    });
   }
-  static navigationOptions = {
-    title: 'Schedule',
-    headerTitle: 'Schedule',
-  };
   render() {
     return <View></View>;
   }
 }
-
-export default Schedule;

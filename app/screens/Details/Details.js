@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect, Component} from 'react';
 import {Image, ScrollView} from 'react-native';
 import {ProgressDialog} from 'react-native-simple-dialogs';
 import Icon from 'react-native-vector-icons/Ionicons';
+import firebase from 'react-native-firebase';
 
 import CircleButtons from '../../components/CircleButton';
 import PropertyButton from '../../components/PropertyButton';
 import PriceDetail from '../../components/PriceDetail';
 
-import {fetchDetails} from '../../api/property';
 import AppStyles from '../../config/styles';
 
 import styles, {
@@ -25,134 +25,113 @@ import styles, {
   View,
 } from './style';
 
-class Details extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true,
-      networkError: false,
-      details: {},
-      features: [],
-      infoIcons: [
-        {name: 'ios-bed', detail: '2 bed'},
-        {name: 'ios-home', detail: '2 bath'},
-        {name: 'ios-albums', detail: '2050 sqft'},
-      ],
-    };
-  }
+const Details = ({navigation}) => {
+  const ref = firebase.firestore().collection('bestPicks');
+  const [loading, setLoading] = useState(true);
+  const [details, setDetails] = useState({});
+  const [infoIcons] = useState([
+    {name: 'ios-bed', detail: '2 bed'},
+    {name: 'ios-home', detail: '2 bath'},
+    {name: 'ios-albums', detail: '2050 sqft'},
+  ]);
 
-  static navigationOptions = ({navigation}) => {
-    return {
-      title: navigation.getParam('title', 'Details'),
-    };
+  fetchData = async () => {
+    const id = navigation.getParam('id');
+    await ref
+      .doc(id)
+      .get()
+      .then(doc => {
+        setDetails(doc.data());
+        setLoading(false);
+      });
   };
 
-  componentDidMount() {
-    this.fetchDetails();
-  }
-  async fetchDetails() {
-    try {
-      let id = this.props.navigation.getParam('id');
-      const details = await fetchDetails(id);
-      this.setState({
-        details: details.data,
-        features: details.data.features,
-        loading: false,
-      });
-    } catch (e) {
-      this.refs.toast.show('Error fetching data');
-      this.setState({loading: false, networkError: true});
-    }
-  }
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  render() {
-    return (
-      !this.state.networkError && (
-        <Container>
-          <ProgressDialog
-            visible={this.state.loading}
-            title="Loading"
-            message="Fetching data"
-          />
-          {!this.state.loading && (
-            <ScrollView nestedScrollEnabled={true}>
-              <TopContainer>
-                <ImageContainer
-                  onPress={() => {
-                    this.props.navigation.navigate('CarouselScreen');
-                  }}>
-                  <Image
-                    source={{uri: this.state.details.imageURL}}
-                    style={styles.image}
-                    resizeMode="cover"
-                  />
-                </ImageContainer>
+  return (
+    <Container>
+      <ProgressDialog
+        visible={loading}
+        title="Loading"
+        message="Fetching data"
+      />
+      {!loading && details && (
+        <ScrollView nestedScrollEnabled={true}>
+          <TopContainer>
+            <ImageContainer
+              onPress={() => {
+                navigation.navigate('CarouselScreen', {images: details.images});
+              }}>
+              <Image
+                source={{uri: details.imageURL}}
+                style={styles.image}
+                resizeMode="cover"
+              />
+            </ImageContainer>
 
-                <MapContainer>
-                  <MapView></MapView>
-                  <MapDetails>
-                    <PriceDetail detail={this.state.details.priceDetail} />
-                  </MapDetails>
-                </MapContainer>
-              </TopContainer>
-              <DetailsContainer>
-                <ScrollView showsVerticalScrollIndicator={false}>
-                  <ScrollView
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}>
-                    <FeatureContainer>
-                      {this.state.features.map(data => {
-                        return (
-                          <CircleButtons
-                            key={data.title}
-                            style={styles.circleButton}
-                            backgroundColor={AppStyles.color.DEFAULT_WHITE}
-                            color="red"
-                            name={data.icon}
-                            title={data.title}
-                          />
-                        );
-                      })}
-                    </FeatureContainer>
-                  </ScrollView>
-                  <InfoContainer>
-                    {this.state.infoIcons.map(data => {
-                      return (
-                        <InfoIcon
-                          key={data.name}
-                          detail={{name: data.name, detail: data.detail}}
-                        />
-                      );
-                    })}
-                  </InfoContainer>
-                  <Text style={{paddingBottom: 64}}>
-                    {this.state.details.details}
-                  </Text>
-                </ScrollView>
-              </DetailsContainer>
-              <ButtonsContainer>
-                <PropertyButton
-                  style={{
-                    backgroundColor: AppStyles.color.DEFAULT_WHITE,
-                    color: AppStyles.color.HEADING_TEXT_COLOR,
-                  }}
-                  title="Contact"
-                />
-                <PropertyButton
-                  style={{
-                    backgroundColor: AppStyles.color.DEFAULT_BLUE,
-                    color: AppStyles.color.DEFAULT_WHITE,
-                  }}
-                  title="Book"
-                />
-              </ButtonsContainer>
+            <MapContainer>
+              <MapView></MapView>
+              <MapDetails>
+                <PriceDetail detail={details.priceDetail} />
+              </MapDetails>
+            </MapContainer>
+          </TopContainer>
+          <DetailsContainer>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}>
+              <FeatureContainer>
+                {details.features.map(data => {
+                  return (
+                    <CircleButtons
+                      key={data.title}
+                      style={styles.circleButton}
+                      backgroundColor={AppStyles.color.DEFAULT_WHITE}
+                      color="red"
+                      name={data.icon}
+                      title={data.title}
+                    />
+                  );
+                })}
+              </FeatureContainer>
             </ScrollView>
-          )}
-        </Container>
-      )
-    );
-  }
-}
+            <InfoContainer>
+              {infoIcons.map(data => {
+                return (
+                  <InfoIcon
+                    key={data.name}
+                    detail={{name: data.name, detail: data.detail}}
+                  />
+                );
+              })}
+            </InfoContainer>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <Text style={{paddingBottom: 64}}>{details.details}</Text>
+            </ScrollView>
+          </DetailsContainer>
+          <ButtonsContainer>
+            <PropertyButton
+              style={{
+                backgroundColor: AppStyles.color.DEFAULT_WHITE,
+                color: AppStyles.color.HEADING_TEXT_COLOR,
+              }}
+              title="Contact"
+            />
+            <PropertyButton
+              style={{
+                backgroundColor: AppStyles.color.DEFAULT_BLUE,
+                color: AppStyles.color.DEFAULT_WHITE,
+              }}
+              title="Book"
+            />
+          </ButtonsContainer>
+        </ScrollView>
+      )}
+    </Container>
+  );
+};
 
 const InfoIcon = props => {
   return (
@@ -171,6 +150,10 @@ const InfoIcon = props => {
       </Text>
     </View>
   );
+};
+
+Details.navigationOptions = ({navigation}) => {
+  title: 'Home';
 };
 
 export default Details;
