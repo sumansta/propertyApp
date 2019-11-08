@@ -18,6 +18,9 @@ const styles = {
 
 export const Container = styled.View`
   width: 100%;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
 `;
 export const TopContainer = styled.View`
   width: 100%;
@@ -32,30 +35,31 @@ export const DetailsContainer = styled.View`
 `;
 
 export const ImageContainer = styled.TouchableOpacity`
-    position:absolute
-    width:100%
-    height:240
-    margin-bottom:24px
-    background-color:green
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 240;
+  margin-bottom: 24px;
+  background-color: green;
 `;
 
 export const MapContainer = styled.View`
     position:absolute
     width:90%
-    height:160
+    height:200
     background-color:${AppStyles.color.DEFAULT_WHITE}
     align-self:center
-    margin-top:160px
+    margin-top:120px
     elevation:10
     border-radius:6
 `;
 
-export const MapView = styled.View`
-  height: 50%;
+export const MapViewContainer = styled.View`
+  height: 60%;
 `;
 
 export const MapDetails = styled.View`
-  height: 50%;
+  height: 40%;
 `;
 
 export const FeatureContainer = styled.View`  

@@ -44,4 +44,10 @@ export const EmptyContainer = styled.View`
   align-content: center;
 `;
 
+export const GifContainer = styled.View`
+  height: 300;
+  width: 300;
+  align-self: center;
+`;
+
 export default styles;

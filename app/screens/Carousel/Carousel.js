@@ -1,23 +1,33 @@
 import React, {Component} from 'react';
-import {Text, Dimensions, ActivityIndicator} from 'react-native';
+import {Dimensions} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
+import Image from 'react-native-fast-image';
+import LottieView from 'lottie-react-native';
 
-import {
+import styles, {
+  Container,
   View,
   InfoContainer,
-  CurrentImage,
   ImageBackgroundView,
-  CurrentVideoTO,
   CarouselBackgroundView,
 } from './style';
-import AppStyles from '../../config/styles';
+
+import images from '../../config/images';
+
+import PriceDetail from '../../components/PriceDetail';
 
 class CarouselSc extends Component {
+  staticNavigationOptions = ({navigation}) => {
+    return {
+      header: null,
+    };
+  };
   constructor(props) {
     super();
     this.state = {
       loading: true,
       images: [],
+      details: [],
     };
     this.props = props;
     this._carousel = {};
@@ -25,14 +35,15 @@ class CarouselSc extends Component {
 
   componentDidMount() {
     const images = this.props.navigation.getParam('images');
-    this.setState({images: images});
-    this.fetch();
+    const details = this.props.navigation.getParam('details');
+    this.setState({images: images, details: details});
+    this.showLoader();
   }
 
-  async fetch() {
+  async showLoader() {
     setTimeout(() => {
       this.setState({loading: false});
-    }, 2000);
+    }, 500);
   }
 
   handleSnapToItem(index) {}
@@ -40,51 +51,48 @@ class CarouselSc extends Component {
   _renderItem = ({item, index}) => {
     return (
       <ImageBackgroundView>
-        <CurrentVideoTO
-          onPress={() => {
-            this._carousel.snapToItem(index);
-          }}>
-          <CurrentImage source={{uri: item.imageURL}} />
-        </CurrentVideoTO>
+        <Image
+          onProgress={e => {
+            <LottieView source={images.loading} autoPlay loop />;
+          }}
+          style={styles.currentImage}
+          source={{uri: item.imageURL}}
+        />
         <InfoContainer>
-          <Text>{item.title}</Text>
+          <PriceDetail detail={this.state.details} />
         </InfoContainer>
       </ImageBackgroundView>
     );
   };
 
   render = () => {
-    return this.state.loading && this.state.images.length > 0 ? (
-      <View
-        style={{
-          justifyContent: 'center',
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          padding: 10,
-          marginTop: '50%',
-        }}>
-        <ActivityIndicator
-          size="large"
-          color={AppStyles.color.DEFAULT_ORANGE}
-        />
-      </View>
-    ) : (
-      <View>
-        <CarouselBackgroundView>
-          <Carousel
-            ref={c => {
-              this._carousel = c;
-            }}
-            data={this.state.images}
-            renderItem={this._renderItem.bind(this)}
-            onSnapToItem={this.handleSnapToItem.bind(this)}
-            sliderWidth={Dimensions.get('window').width}
-            itemWidth={Dimensions.get('window').width}
-            layout={'default'}
-            firstItem={0}
-          />
-        </CarouselBackgroundView>
-      </View>
+    return (
+      <Container>
+        {this.state.loading && this.state.images.length > 0 ? (
+          <View
+            style={{
+              height: 150,
+              width: 150,
+            }}>
+            <LottieView source={images.loading} autoPlay loop />
+          </View>
+        ) : (
+          <CarouselBackgroundView>
+            <Carousel
+              ref={c => {
+                this._carousel = c;
+              }}
+              data={this.state.images}
+              renderItem={this._renderItem.bind(this)}
+              onSnapToItem={this.handleSnapToItem.bind(this)}
+              sliderWidth={Dimensions.get('window').width}
+              itemWidth={Dimensions.get('window').width}
+              layout={'default'}
+              firstItem={0}
+            />
+          </CarouselBackgroundView>
+        )}
+      </Container>
     );
   };
 }

@@ -5,8 +5,11 @@ import {ProgressDialog} from 'react-native-simple-dialogs';
 import SimpleButton from '../../components/SimpleButton';
 import LogoContainer from '../../components/LogoContainer';
 import SimpleTextInput from '../../components/SimpleTextInput';
+import CustomToast from '../../utils/NativeModules';
 
 import firebase from 'react-native-firebase';
+
+import {inputTypes, validate} from '../../utils/validator';
 
 import {Container, HeadingText, FormContainer, LoginContainer} from './style';
 
@@ -16,6 +19,7 @@ export default class Register extends Component {
     this.state = {
       email: '',
       password: '',
+      fullName: '',
       error: false,
       errorMessage: '',
       progressVisible: false,
@@ -31,21 +35,28 @@ export default class Register extends Component {
   handleRegister = () => {
     this.setState({progressVisible: true});
     const {email, password} = this.state;
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState({progressVisible: false});
-        this.props.navigation.navigate('Auth');
-        alert('user created');
-      })
-      .catch(er => {
-        this.setState({
-          progressVisible: false,
-          error: true,
-          errorMessage: 'Invalid Password',
+    console.log(this.state);
+    const isValid = validate(email, inputTypes.email) && password.length > 4;
+    if (isValid) {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          this.setState({progressVisible: false});
+          this.props.navigation.navigate('Auth');
+          alert('user created');
+        })
+        .catch(er => {
+          this.setState({
+            progressVisible: false,
+            error: true,
+            errorMessage: 'Invalid Password',
+          });
         });
-      });
+    } else {
+      this.setState({progressVisible: false});
+      CustomToast.show('Invalid Fields', CustomToast.LONG);
+    }
   };
   render() {
     return (
@@ -57,15 +68,15 @@ export default class Register extends Component {
           <SimpleTextInput placeholder="Last Name" />
           <SimpleTextInput
             placeholder="Email Address"
-            onChangeValue={email => {
-              this.setState({error: false, email: email});
+            onChangeText={email => {
+              this.setState({email});
             }}
           />
           <SimpleTextInput
             placeholder="Password"
             secureTextEntry={true}
-            onChangeValue={password => {
-              this.setState({error: false, password: password});
+            onChangeText={password => {
+              this.setState({password});
             }}
           />
           <SimpleButton title="Register" onPress={this.handleRegister} />

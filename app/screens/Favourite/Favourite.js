@@ -2,18 +2,18 @@ import React, {useState, useEffect} from 'react';
 import {View, Text} from 'react-native';
 import {connect} from 'react-redux';
 import firebase from 'react-native-firebase';
-
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import {ScrollView} from 'react-native-gesture-handler';
+import LottieView from 'lottie-react-native';
 
 import AppStyles from '../../config/styles';
-import ToastExample from '../../utils/CustomToast';
+import images from '../../config/images';
 
-import {Container, EmptyContainer} from './style';
+import {Container, EmptyContainer, GifContainer} from './style';
 
 import CardView from '../../components/CardView';
 import HeadingText from '../../components/HeadingText';
 import SimpleButton from '../../components/SimpleButton';
-import {ScrollView} from 'react-native-gesture-handler';
+import {CustomToast} from '../../utils/NativeModules';
 
 const mapStateToProps = state => {
   return {favourites: state.favourites};
@@ -41,7 +41,7 @@ const Favourite = ({navigation}) => {
     let toastMessage = favourite
       ? 'Removed from favourites'
       : 'Added to Favourites';
-    ToastExample.show(toastMessage, ToastExample.SHORT);
+    CustomToast.show(toastMessage, CustomToast.SHORT);
     await ref.doc(id).update({favourite: !favourite});
   };
 
@@ -79,13 +79,9 @@ const Favourite = ({navigation}) => {
         </ScrollView>
       ) : (
         <EmptyContainer>
-          <Icon
-            name="hourglass-empty"
-            style={{
-              alignSelf: 'center',
-              fontSize: 128,
-              color: AppStyles.color.DEFAULT_ORANGE,
-            }}></Icon>
+          <GifContainer>
+            <LottieView source={images.emptyBox} autoPlay loop />
+          </GifContainer>
           <View>
             <Text
               style={{

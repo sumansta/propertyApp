@@ -4,10 +4,12 @@ import {connect} from 'react-redux';
 import {ProgressDialog} from 'react-native-simple-dialogs';
 import firebase from 'react-native-firebase';
 
-import ToastExample from '../../utils/CustomToast';
+import CustomToast from '../../utils/NativeModules';
 import SimpleButton from '../../components/SimpleButton';
 import LogoContainer from '../../components/LogoContainer';
 import SimpleTextInput from '../../components/SimpleTextInput';
+
+import {inputTypes, validate} from '../../utils/validator';
 
 import {
   Container,
@@ -39,7 +41,8 @@ export class Login extends Component {
   handleLogin = () => {
     this.setState({progressVisible: true});
     const {email, password} = this.state;
-    if (email && email.length > 0 && password && password.length > 0) {
+    const isValid = validate(email, inputTypes.email);
+    if (isValid) {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
@@ -48,12 +51,12 @@ export class Login extends Component {
           this.props.navigation.navigate('Dashboard');
         })
         .catch(err => {
-          ToastExample.show('Invalid Login', ToastExample.LONG);
+          CustomToast.show('Invalid Login', CustomToast.LONG);
           this.setState({progressVisible: false, error: true});
         });
     } else {
       this.setState({progressVisible: false});
-      ToastExample.show('Empty Fields', ToastExample.LONG);
+      CustomToast.show('Invalid Email', CustomToast.LONG);
     }
   };
   render() {

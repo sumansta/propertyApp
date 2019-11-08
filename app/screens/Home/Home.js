@@ -10,7 +10,7 @@ import {saveBestPicks, markFavourites} from '../../store/actions';
 import CardView from '../../components/CardView';
 import FeatureButtons from '../../components/FeatureButtons';
 
-import ToastExample from '../../utils/CustomToast';
+import {CustomToast} from '../../utils/NativeModules';
 
 import styles, {Container} from './style';
 
@@ -23,7 +23,7 @@ const Home = ({navigation}) => {
     let toastMessage = favourite
       ? 'Removed from favourites'
       : 'Added to Favourites';
-    ToastExample.show(toastMessage, ToastExample.SHORT);
+    CustomToast.show(toastMessage, CustomToast.SHORT);
     await ref.doc(id).update({favourite: !favourite});
   };
 

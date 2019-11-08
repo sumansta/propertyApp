@@ -3,7 +3,7 @@ import {Text} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import CheckBox from '@react-native-community/checkbox';
 
-import CustomVibrate from '../../utils/CustomVibrate';
+import {CustomVibrate} from '../../utils/NativeModules';
 
 import {
   Container,
@@ -51,10 +51,6 @@ class Discover extends Component {
       ],
     };
   }
-
-  static navigationOptions = {
-    title: 'Discover',
-  };
 
   componentDidMount() {
     this.generateAdditionalPreference();
@@ -221,6 +217,7 @@ class Discover extends Component {
             <LSView>
               <LSText>Bedroom</LSText>
               <CheckBox
+                style={{marginRight: 40}}
                 tintColors={{true: AppStyles.color.DEFAULT_ORANGE}}
                 value={this.state.livingSpace.bedroom}
                 onValueChange={() => {
@@ -232,11 +229,11 @@ class Discover extends Component {
                   });
                 }}
               />
-              <View />
             </LSView>
             <LSView>
               <LSText>Bathroom</LSText>
               <CheckBox
+                style={{marginRight: 40}}
                 tintColors={{true: AppStyles.color.DEFAULT_ORANGE}}
                 value={this.state.livingSpace.bathroom}
                 onValueChange={() => {
@@ -248,7 +245,6 @@ class Discover extends Component {
                   });
                 }}
               />
-              <View />
             </LSView>
             <LSView>
               <LSText>Kitchen</LSText>

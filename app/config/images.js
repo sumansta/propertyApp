@@ -1,8 +1,8 @@
 const images = {
-  image1: require('../assets/images/image1.jpg'),
-  image2: require('../assets/images/image2.jpg'),
-  image3: require('../assets/images/image3.jpg'),
-  image4: require('../assets/images/image4.jpg'),
+  profile: require('../assets/images/profile.png'),
+  loading: require('../assets/animations/loading.json'),
+  favourite: require('../assets/animations/favourite.json'),
+  emptyBox: require('../assets/animations/empty-box.json'),
 };
 
 export default images;

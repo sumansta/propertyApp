@@ -1,14 +1,16 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Image, ScrollView} from 'react-native';
-import {ProgressDialog} from 'react-native-simple-dialogs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import firebase from 'react-native-firebase';
+import LotteView from 'lottie-react-native';
 
 import CircleButtons from '../../components/CircleButton';
 import PropertyButton from '../../components/PropertyButton';
 import PriceDetail from '../../components/PriceDetail';
+import MapView from '../../components/MapView';
 
 import AppStyles from '../../config/styles';
+import images from '../../config/images';
 
 import styles, {
   Container,
@@ -16,7 +18,7 @@ import styles, {
   DetailsContainer,
   ImageContainer,
   MapContainer,
-  MapView,
+  MapViewContainer,
   MapDetails,
   FeatureContainer,
   InfoContainer,
@@ -52,17 +54,19 @@ const Details = ({navigation}) => {
 
   return (
     <Container>
-      <ProgressDialog
-        visible={loading}
-        title="Loading"
-        message="Fetching data"
-      />
-      {!loading && details && (
+      {loading ? (
+        <View style={{height: 150, width: 150}}>
+          <LotteView source={images.loading} loop autoPlay />
+        </View>
+      ) : (
         <ScrollView nestedScrollEnabled={true}>
           <TopContainer>
             <ImageContainer
               onPress={() => {
-                navigation.navigate('CarouselScreen', {images: details.images});
+                navigation.navigate('CarouselScreen', {
+                  details: details.priceDetail,
+                  images: details.images,
+                });
               }}>
               <Image
                 source={{uri: details.imageURL}}
@@ -72,7 +76,9 @@ const Details = ({navigation}) => {
             </ImageContainer>
 
             <MapContainer>
-              <MapView></MapView>
+              <MapViewContainer>
+                <MapView style={{height: 120}} />
+              </MapViewContainer>
               <MapDetails>
                 <PriceDetail detail={details.priceDetail} />
               </MapDetails>
@@ -153,7 +159,9 @@ const InfoIcon = props => {
 };
 
 Details.navigationOptions = ({navigation}) => {
-  title: 'Home';
+  return {
+    title: 'Details',
+  };
 };
 
 export default Details;

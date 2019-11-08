@@ -13,6 +13,7 @@ export const Container = styled.View`
   flex: 1;
 `;
 export const View = styled.View``;
+export const RangeSlider = styled.TouchableOpacity``;
 
 export const ComponentContainer = styled.View`
   margin-vertical: 8px;

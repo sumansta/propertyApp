@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import {CameraRoll, View} from 'react-native';
+import {View} from 'react-native';
+
+import MapView from '../../components/MapView';
 
 export default class Schedule extends Component {
-  componentDidMount() {
-    CameraRoll.getPhotos({first: 1}, data => {
-      console.log(data);
-    });
-  }
   render() {
-    return <View></View>;
+    return (
+      <View>
+        <MapView />
+      </View>
+    );
   }
 }

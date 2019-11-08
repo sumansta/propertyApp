@@ -13,7 +13,7 @@ const styles = {
 export const View = styled.View``;
 export const Text = styled.Text``;
 export const Container = styled.View`
-  height: 100%;
+  height: 80%;
   flex: 1;
   flex-direction: row;
 `;

@@ -70,7 +70,7 @@ export const FavouriteButton = styled.TouchableOpacity`
   position: absolute;
   height: 50px;
   width: 50px;
-  padding: 10px;
+  padding: 8px;
   right: 4;
   top: 4;
   elevation: 12;
