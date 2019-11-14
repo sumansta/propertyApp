@@ -1,12 +1,12 @@
 import React from 'react';
-import {TouchableOpacity, View, Text, ActivityIndicator} from 'react-native';
+import { TouchableOpacity, View, Text, ActivityIndicator } from 'react-native';
 import Image from 'react-native-fast-image';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import LottieView from 'lottie-react-native';
+import PropTypes from 'prop-types';
 
 import CircleButton from '../CircleButton';
-import styles, {FavouriteButton} from './style';
-
-import LottieView from 'lottie-react-native';
+import styles, { FavouriteButton } from './style';
 
 import AppStyles from '../../config/styles';
 import images from '../../config/images';
@@ -22,7 +22,7 @@ const FavButton = props => {
     </View>
   ) : (
     <Icon
-      name={'star-border'}
+      name="star-border"
       style={{
         fontSize: 32,
         color: AppStyles.color.DEFAULT_ORANGE,
@@ -44,7 +44,7 @@ class CardView extends React.Component {
         <TouchableOpacity
           activeOpacity={1}
           onPress={() => this.props.handleNavigation()}>
-          <View style={{...styles.cardView, ...this.props.style}}>
+          <View style={{ ...styles.cardView, ...this.props.style }}>
             <FavouriteButton
               onPress={() => {
                 this.props.showToast();
@@ -60,7 +60,7 @@ class CardView extends React.Component {
               />
             </View>
             <View style={styles.titleText}>
-              <View style={{flex: 5}}>
+              <View style={{ flex: 5 }}>
                 <Text style={styles.subHeadingText}>{this.props.title}</Text>
                 <Text style={styles.normalText}>{this.props.description}</Text>
               </View>
@@ -83,5 +83,20 @@ class CardView extends React.Component {
     );
   }
 }
+
+CardView.propTypes = {
+  style: PropTypes.object,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  iconName: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  favourite: PropTypes.bool,
+  handleNavigation: PropTypes.func,
+  showToast: PropTypes.func,
+};
+
+FavButton.propTypes = {
+  favourite: PropTypes.bool,
+};
 
 export default CardView;

@@ -1,19 +1,17 @@
-import React, {Component} from 'react';
-import {Text} from 'react-native';
-
+import React from 'react';
+import { Text } from 'react-native';
+import PropTypes from 'prop-types';
 import styles from './style';
 
-class HeadingText extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <Text style={{...styles.headingText, ...this.props.style}}>
-        {this.props.title}
-      </Text>
-    );
-  }
-}
+const HeadingText = props => {
+  return (
+    <Text style={{ ...styles.headingText, ...props.style }}>{props.title}</Text>
+  );
+};
+
+HeadingText.propTypes = {
+  title: PropTypes.string.isRequired,
+  style: PropTypes.object,
+};
 
 export default HeadingText;

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {TouchableOpacity, Text, StyleSheet, Dimensions} from 'react-native';
+import React, { Component } from 'react';
+import { TouchableOpacity, Text } from 'react-native';
 
 import styles from './style';
 
@@ -12,7 +12,7 @@ class PropertyButton extends Component {
       <TouchableOpacity
         style={this.getStyle()}
         onPress={this.props.handleClick}>
-        <Text style={{...styles.text, color: this.props.style.color}}>
+        <Text style={{ ...styles.text, color: this.props.style.color }}>
           {this.props.title
             ? String(this.props.title).toUpperCase()
             : 'P-BUTTON'}
@@ -22,7 +22,7 @@ class PropertyButton extends Component {
   }
 
   getStyle() {
-    return {...styles.button, ...this.props.style};
+    return { ...styles.button, ...this.props.style };
   }
 }
 

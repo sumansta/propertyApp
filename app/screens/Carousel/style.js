@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import AppStyles from '../../config/styles';
 
 const styles = StyleSheet.create({

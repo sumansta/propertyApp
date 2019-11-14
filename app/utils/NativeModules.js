@@ -1,4 +1,4 @@
-import {NativeModules} from 'react-native';
+import { NativeModules } from 'react-native';
 
 export const CustomVibrate = NativeModules.VibrationExample;
 export const CustomToast = NativeModules.ToastExample;

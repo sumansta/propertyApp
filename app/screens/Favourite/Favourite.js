@@ -1,25 +1,26 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text} from 'react-native';
-import {connect} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
-import {ScrollView} from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 import LottieView from 'lottie-react-native';
+import PropTypes from 'prop-types';
 
 import AppStyles from '../../config/styles';
 import images from '../../config/images';
 
-import {Container, EmptyContainer, GifContainer} from './style';
+import { Container, EmptyContainer, GifContainer } from './style';
 
 import CardView from '../../components/CardView';
 import HeadingText from '../../components/HeadingText';
 import SimpleButton from '../../components/SimpleButton';
-import {CustomToast} from '../../utils/NativeModules';
+import { CustomToast } from '../../utils/NativeModules';
 
 const mapStateToProps = state => {
-  return {favourites: state.favourites};
+  return { favourites: state.favourites };
 };
 
-const Favourite = ({navigation}) => {
+const Favourite = ({ navigation }) => {
   const ref = firebase.firestore().collection('bestPicks');
 
   const [favourites, setFavourites] = useState([]);
@@ -27,25 +28,28 @@ const Favourite = ({navigation}) => {
   useEffect(() => {
     return ref.onSnapshot(querySnapshot => {
       const list = [];
+
       querySnapshot.forEach(doc => {
         const data = doc.data();
+
         if (data.favourite) {
-          list.push({...data, id: doc.id});
+          list.push({ ...data, id: doc.id });
         }
       });
       setFavourites(list);
     });
   }, []);
 
-  const toggleFavourite = async ({id, favourite}) => {
-    let toastMessage = favourite
+  const toggleFavourite = async ({ id, favourite }) => {
+    const toastMessage = favourite
       ? 'Removed from favourites'
       : 'Added to Favourites';
+
     CustomToast.show(toastMessage, CustomToast.SHORT);
-    await ref.doc(id).update({favourite: !favourite});
+    await ref.doc(id).update({ favourite: !favourite });
   };
 
-  handleExploreHomes = () => {
+  const handleExploreHomes = () => {
     navigation.navigate('Home');
   };
 
@@ -58,7 +62,7 @@ const Favourite = ({navigation}) => {
             return (
               <CardView
                 favourite={item.favourite}
-                style={{width: '95%'}}
+                style={{ width: '95%' }}
                 key={item.id}
                 handleNavigation={() => {
                   navigation.navigate('DetailsScreen', {
@@ -69,7 +73,7 @@ const Favourite = ({navigation}) => {
                 showToast={() => {
                   toggleFavourite(item);
                 }}
-                image={{uri: item.imageURL}}
+                image={{ uri: item.imageURL }}
                 iconName={item.icon}
                 title={item.heading}
                 description={item.description}
@@ -107,6 +111,10 @@ const Favourite = ({navigation}) => {
       )}
     </Container>
   );
+};
+
+Favourite.protoTypes = {
+  navigation: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(Favourite);

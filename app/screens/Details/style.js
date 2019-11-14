@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import {Dimensions} from 'react-native';
 
 import AppStyles from '../../config/styles';
 

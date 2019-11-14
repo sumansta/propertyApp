@@ -1,34 +1,36 @@
-import React, {Component} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import styles, {Button, Text} from './style';
+import styles, { Button, Text } from './style';
 import AppStyles from '../../config/styles';
 
-class RoundedButton extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <Button
+const RoundedButton = props => {
+  return (
+    <Button
+      style={{
+        ...styles.button,
+        backgroundColor: props.color || AppStyles.color.DEFAULT_WHITE,
+      }}
+      onPressIn={props.handleClick}>
+      <Text
         style={{
-          ...styles.button,
-          backgroundColor: this.props.color || AppStyles.color.DEFAULT_WHITE,
-        }}
-        onPressIn={this.props.handleClick}>
-        <Text
-          style={{
-            ...styles.text,
-            color:
-              this.props.status == 'active'
-                ? AppStyles.color.DEFAULT_WHITE
-                : AppStyles.color.NORMAL_TEXT_COLOR,
-          }}>
-          {this.props.title || ' Button'}
-        </Text>
-      </Button>
-    );
-  }
-}
+          ...styles.text,
+          color:
+            props.status === 'active'
+              ? AppStyles.color.DEFAULT_WHITE
+              : AppStyles.color.NORMAL_TEXT_COLOR,
+        }}>
+        {props.title || ' Button'}
+      </Text>
+    </Button>
+  );
+};
+
+RoundedButton.propTypes = {
+  status: PropTypes.string,
+  title: PropTypes.string,
+  color: PropTypes.string,
+  handleClick: PropTypes.func,
+};
 
 export default RoundedButton;

@@ -1,8 +1,8 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 
-import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import AppStyles from '../config/styles';
 
@@ -20,21 +20,15 @@ const BottomNavigatorStack = createMaterialBottomTabNavigator(
       screen: HomeScreenStack,
       navigationOptions: {
         tabBarLabel: 'Home',
-        tabBarIcon: ({tintColor}) => (
-          <View>
-            <Icon style={[{color: tintColor}]} size={25} name={'ios-home'} />
-          </View>
-        ),
+        tabBarIcon: ({ tintColor }) => <TabIcon color={tintColor} name="home" />,
       },
     },
     Discover: {
       screen: DiscoverScreen,
       navigationOptions: {
         tabBarLabel: 'Discover',
-        tabBarIcon: ({tintColor}) => (
-          <View>
-            <Icon style={[{color: tintColor}]} size={25} name={'ios-compass'} />
-          </View>
+        tabBarIcon: ({ tintColor }) => (
+          <TabIcon color={tintColor} name="search" />
         ),
       },
     },
@@ -42,10 +36,8 @@ const BottomNavigatorStack = createMaterialBottomTabNavigator(
       screen: ScheduleScreen,
       navigationOptions: {
         tabBarLabel: 'Schedule',
-        tabBarIcon: ({tintColor}) => (
-          <View>
-            <Icon style={[{color: tintColor}]} size={25} name={'ios-clock'} />
-          </View>
+        tabBarIcon: ({ tintColor }) => (
+          <TabIcon color={tintColor} name="schedule" />
         ),
       },
     },
@@ -53,21 +45,15 @@ const BottomNavigatorStack = createMaterialBottomTabNavigator(
       screen: FavouriteScreen,
       navigationOptions: {
         tabBarLabel: 'Favourite',
-        tabBarIcon: ({tintColor}) => (
-          <View>
-            <Icon style={[{color: tintColor}]} size={25} name={'ios-star'} />
-          </View>
-        ),
+        tabBarIcon: ({ tintColor }) => <TabIcon color={tintColor} name="star" />,
       },
     },
     Profile: {
       screen: ProfileScreen,
       navigationOptions: {
         tabBarLabel: 'Profile',
-        tabBarIcon: ({tintColor}) => (
-          <View>
-            <Icon style={[{color: tintColor}]} size={25} name={'ios-person'} />
-          </View>
+        tabBarIcon: ({ tintColor }) => (
+          <TabIcon color={tintColor} name="person" />
         ),
       },
     },
@@ -76,8 +62,16 @@ const BottomNavigatorStack = createMaterialBottomTabNavigator(
     initialRouteName: 'Home',
     activeColor: AppStyles.color.ACTIVE_TAB_COLOR,
     inactiveColor: AppStyles.color.INACTIVE_TAB_COLOR,
-    barStyle: {backgroundColor: AppStyles.color.DEFAULT_WHITE},
+    barStyle: { backgroundColor: AppStyles.color.DEFAULT_WHITE },
   },
 );
+
+const TabIcon = props => {
+  return (
+    <View>
+      <Icon style={{ color: props.color }} size={25} name={props.name} />
+    </View>
+  );
+};
 
 export default BottomNavigatorStack;

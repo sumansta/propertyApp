@@ -35,7 +35,6 @@ export default class Register extends Component {
   handleRegister = () => {
     this.setState({progressVisible: true});
     const {email, password} = this.state;
-    console.log(this.state);
     const isValid = validate(email, inputTypes.email) && password.length > 4;
     if (isValid) {
       firebase

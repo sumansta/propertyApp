@@ -1,16 +1,17 @@
-import React, {Component} from 'react';
-import {Text, View, Button} from 'react-native';
-import {connect} from 'react-redux';
-import {Avatar, Icon, SocialIcon} from 'react-native-elements';
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
+import { connect } from 'react-redux';
+import { Avatar, SocialIcon } from 'react-native-elements';
 import DialogInput from 'react-native-dialog-input';
+import PropTypes from 'prop-types';
 
 import firebase from 'react-native-firebase';
 
 import SimpleButton from '../../components/SimpleButton';
 
-import {Container} from './style';
+import { Container } from './style';
 
-import {saveLogin} from '../../store/actions';
+import { saveLogin } from '../../store/actions';
 import AppStyles from '../../config/styles';
 import images from '../../config/images';
 
@@ -29,35 +30,32 @@ class Profile extends Component {
 
   async fetchUser() {
     const user = await firebase.auth().currentUser;
-    console.log(user.displayName);
-    this.setState({email: user.email, displayName: user.displayName});
+
+    this.setState({ email: user.email, displayName: user.displayName });
   }
 
   async updateUser(inputText) {
     try {
-      this.setState({isDialogVisible: false});
-      await firebase.auth().currentUser.updateProfile({displayName: inputText});
+      this.setState({ isDialogVisible: false });
+      await firebase.auth().currentUser.updateProfile({ displayName: inputText });
       this.fetchUser();
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   }
 
   showInputDialog = () => {
-    this.setState({isDialogVisible: true});
+    this.setState({ isDialogVisible: true });
   };
 
   logOut = async () => {
     await firebase
       .auth()
       .signOut(() => {})
-      .catch(er => {
-        console.log(er);
-      });
+      .catch(er => {});
     this.props.navigation.navigate('Auth');
   };
   render() {
     const user = this.state;
+
     return (
       <Container>
         <DialogInput
@@ -68,7 +66,7 @@ class Profile extends Component {
             this.updateUser(inputText);
           }}
           closeDialog={() => {
-            this.setState({isDialogVisible: false});
+            this.setState({ isDialogVisible: false });
           }}></DialogInput>
         <Avatar
           rounded
@@ -84,10 +82,10 @@ class Profile extends Component {
           }}>
           {user.displayName}
         </Text>
-        <Text style={{color: AppStyles.color.NORMAL_TEXT_COLOR}}>
+        <Text style={{ color: AppStyles.color.NORMAL_TEXT_COLOR }}>
           {user.email}
         </Text>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <SocialIcon type="twitter" />
           <SocialIcon type="instagram" />
           <SocialIcon type="facebook" />
@@ -110,7 +108,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Profile);
+Profile.propTypes = {
+  navigation: PropTypes.object,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

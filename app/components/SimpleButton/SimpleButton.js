@@ -1,16 +1,19 @@
-import React, {Component} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import {Button, Text} from './style';
+import { Button, Text } from './style';
 
-export default class SimpleButton extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <Button onPress={this.props.onPress}>
-        <Text>{this.props.title}</Text>
-      </Button>
-    );
-  }
-}
+const SimpleButton = props => {
+  return (
+    <Button onPress={props.onPress}>
+      <Text>{props.title}</Text>
+    </Button>
+  );
+};
+
+SimpleButton.propTypes = {
+  onPress: PropTypes.func,
+  title: PropTypes.string,
+};
+
+export default SimpleButton;

@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {Text} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
+import React, { Component } from 'react';
+import { Text } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import CheckBox from '@react-native-community/checkbox';
 
-import {CustomVibrate} from '../../utils/NativeModules';
+import { CustomVibrate } from '../../utils/NativeModules';
 
 import {
   Container,
@@ -44,10 +44,10 @@ class Discover extends Component {
       showMoreTitle: 'More >>',
       buttonsToShow: 2,
       additionalPreferences: [
-        {id: 1, title: 'Parks Nearby', status: 'inactive'},
-        {id: 2, title: 'Sports Facilities', status: 'inactive'},
-        {id: 3, title: 'Cultural Life', status: 'inactive'},
-        {id: 4, title: 'Shopping Malls', status: 'inactive'},
+        { id: 1, title: 'Parks Nearby', status: 'inactive' },
+        { id: 2, title: 'Sports Facilities', status: 'inactive' },
+        { id: 3, title: 'Cultural Life', status: 'inactive' },
+        { id: 4, title: 'Shopping Malls', status: 'inactive' },
       ],
     };
   }
@@ -57,12 +57,14 @@ class Discover extends Component {
   }
 
   rentDurationSlider = (j = 0) => {
-    let slides = [];
+    const slides = [];
+
     for (let i = 0; i < 5; i++) {
-      let slideColor =
+      const slideColor =
         i <= j ? AppStyles.color.DEFAULT_ORANGE : AppStyles.color.DEFAULT_WHITE;
-      let borderLeft = i == 0 ? 10 : 0;
-      let borderRight = i == 4 ? 10 : 0;
+      const borderLeft = i === 0 ? 10 : 0;
+      const borderRight = i === 4 ? 10 : 0;
+
       slides.push(
         <View key={i}>
           <RentDurationRange
@@ -76,7 +78,7 @@ class Discover extends Component {
             }}
             onPress={() => {
               CustomVibrate.vibrate();
-              this.setState({rentDuration: i});
+              this.setState({ rentDuration: i });
             }}
           />
           <Text
@@ -87,23 +89,24 @@ class Discover extends Component {
               marginTop: 8,
               fontWeight: 'bold',
             }}>
-            {i == 0 ? 1 : i * 3}
-            {i == 0 ? ' month' : ' months'}
+            {i === 0 ? 1 : i * 3}
+            {i === 0 ? ' month' : ' months'}
           </Text>
         </View>,
       );
     }
+
     return slides;
   };
 
   handleButtonClick = id => {};
 
   setPrice = ([min, max]) => {
-    this.setState({price: {min: min, max: max}});
+    this.setState({ price: { min: min, max: max } });
   };
 
   setDistance = distance => {
-    this.setState({distance});
+    this.setState({ distance });
   };
 
   handleReset = () => {
@@ -111,10 +114,11 @@ class Discover extends Component {
       ...el,
       status: 'inactive',
     }));
+
     this.setState({
       ...this.state,
       rentDuration: 0,
-      price: {min: 1000, max: 10000},
+      price: { min: 1000, max: 10000 },
       distance: [400],
       livingSpace: {
         bedroom: false,
@@ -126,26 +130,27 @@ class Discover extends Component {
     });
   };
   handleApply = () => {
-    let filter = {
+    const filter = {
       rentDuration: this.state.rentDuration,
       distance: this.state.distance,
       priceRange: this.state.price,
       additionalPreferences: this.state.additionalPreferences.filter(
-        el => el.status == 'active',
+        el => el.status === 'active',
       ),
       livingSpace: this.state.livingSpace,
     };
-    console.log(filter);
   };
 
   generateAdditionalPreference(buttonsLength = 4) {
-    let newAdditionalPreferences = this.state.additionalPreferences;
-    let additionalButtons = [];
+    const newAdditionalPreferences = this.state.additionalPreferences;
+    const additionalButtons = [];
+
     for (let i = 0; i < buttonsLength; i++) {
-      let data = newAdditionalPreferences[i];
-      let objIndex = newAdditionalPreferences.findIndex(
-        obj => obj.id == data.id,
+      const data = newAdditionalPreferences[i];
+      const objIndex = newAdditionalPreferences.findIndex(
+        obj => obj.id === data.id,
       );
+
       additionalButtons.push(
         <RoundedButton
           activeOpacity={1}
@@ -153,16 +158,16 @@ class Discover extends Component {
           active={data.active}
           title={data.title}
           color={
-            data.status == 'active'
+            data.status === 'active'
               ? AppStyles.color.DEFAULT_ORANGE
-              : data.status == 'inactive'
-              ? AppStyles.color.INACTIVE_BUTTON_COLOR
-              : AppStyles.color.DEFAULT_WHITE
+              : data.status === 'inactive'
+                ? AppStyles.color.INACTIVE_BUTTON_COLOR
+                : AppStyles.color.DEFAULT_WHITE
           }
           status={data.status}
           handleClick={() => {
             this.handleButtonClick(objIndex);
-            if (newAdditionalPreferences[objIndex].status == 'active') {
+            if (newAdditionalPreferences[objIndex].status === 'active') {
               newAdditionalPreferences[objIndex].status = 'inactive';
             } else {
               newAdditionalPreferences[objIndex].status = 'active';
@@ -207,8 +212,9 @@ class Discover extends Component {
   render() {
     const slides = this.rentDurationSlider(this.state.rentDuration);
     const additionalButtons = this.generateAdditionalPreference();
-    const {min, max} = this.state.price;
+    const { min, max } = this.state.price;
     const distance = this.state.distance;
+
     return (
       <Container>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -217,8 +223,8 @@ class Discover extends Component {
             <LSView>
               <LSText>Bedroom</LSText>
               <CheckBox
-                style={{marginRight: 40}}
-                tintColors={{true: AppStyles.color.DEFAULT_ORANGE}}
+                style={{ marginRight: 40 }}
+                tintColors={{ true: AppStyles.color.DEFAULT_ORANGE }}
                 value={this.state.livingSpace.bedroom}
                 onValueChange={() => {
                   this.setState({
@@ -233,8 +239,8 @@ class Discover extends Component {
             <LSView>
               <LSText>Bathroom</LSText>
               <CheckBox
-                style={{marginRight: 40}}
-                tintColors={{true: AppStyles.color.DEFAULT_ORANGE}}
+                style={{ marginRight: 40 }}
+                tintColors={{ true: AppStyles.color.DEFAULT_ORANGE }}
                 value={this.state.livingSpace.bathroom}
                 onValueChange={() => {
                   this.setState({
@@ -297,7 +303,7 @@ class Discover extends Component {
           </ComponentContainer>
           <ComponentContainer>
             <HeadingText title="Rent Duration" />
-            <View style={{flexDirection: 'row'}}>{slides}</View>
+            <View style={{ flexDirection: 'row' }}>{slides}</View>
           </ComponentContainer>
           <ComponentContainer>
             <HeadingText title="Price" />

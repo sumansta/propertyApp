@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
-import {Dimensions} from 'react-native';
+import React, { Component } from 'react';
+import { Dimensions } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import Image from 'react-native-fast-image';
 import LottieView from 'lottie-react-native';
+import PropTypes from 'prop-types';
 
 import styles, {
   Container,
@@ -17,11 +18,12 @@ import images from '../../config/images';
 import PriceDetail from '../../components/PriceDetail';
 
 class CarouselSc extends Component {
-  staticNavigationOptions = ({navigation}) => {
+  staticNavigationOptions = () => {
     return {
       header: null,
     };
   };
+
   constructor(props) {
     super();
     this.state = {
@@ -36,27 +38,28 @@ class CarouselSc extends Component {
   componentDidMount() {
     const images = this.props.navigation.getParam('images');
     const details = this.props.navigation.getParam('details');
-    this.setState({images: images, details: details});
+
+    this.setState({ images: images, details: details });
     this.showLoader();
   }
 
-  async showLoader() {
+  showLoader() {
     setTimeout(() => {
-      this.setState({loading: false});
+      this.setState({ loading: false });
     }, 500);
   }
 
-  handleSnapToItem(index) {}
+  handleSnapToItem() {}
 
-  _renderItem = ({item, index}) => {
+  _renderItem = ({ item }) => {
     return (
       <ImageBackgroundView>
         <Image
-          onProgress={e => {
+          onProgress={() => {
             <LottieView source={images.loading} autoPlay loop />;
           }}
           style={styles.currentImage}
-          source={{uri: item.imageURL}}
+          source={{ uri: item.imageURL }}
         />
         <InfoContainer>
           <PriceDetail detail={this.state.details} />
@@ -96,5 +99,9 @@ class CarouselSc extends Component {
     );
   };
 }
+
+CarouselSc.propTypes = {
+  navigation: PropTypes.object,
+};
 
 export default CarouselSc;

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const images = {
   profile: require('../assets/images/profile.png'),
   loading: require('../assets/animations/loading.json'),

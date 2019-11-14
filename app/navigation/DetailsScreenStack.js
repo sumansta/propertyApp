@@ -1,3 +1,6 @@
+import React from 'react';
+import {Text} from 'react-native';
+
 import {createStackNavigator} from 'react-navigation-stack';
 
 import DetailsScreen from '../screens/Details';
@@ -7,6 +10,11 @@ const DetailsScreenStack = createStackNavigator(
   {
     DetailsScreen: {
       screen: DetailsScreen,
+      navigationOptions: {
+        header: () => {
+          <CustomHeader />;
+        },
+      },
     },
     CarouselScreen: {
       screen: CarouselScreen,
@@ -15,9 +23,13 @@ const DetailsScreenStack = createStackNavigator(
   {
     initialRouteKey: DetailsScreen,
     defaultNavigationOptions: {
-      header: null,
+      headerTransparent: true,
     },
   },
 );
+
+const CustomHeader = () => {
+  return <Text>Back</Text>;
+};
 
 export default DetailsScreenStack;

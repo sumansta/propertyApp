@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import React from 'react';
+import { View, Text } from 'react-native';
+import PropTypes from 'prop-types';
 
-import {Button, BText} from './style';
+import { Button, BText } from './style';
 
 const NumericInput = props => {
   return (
-    <View style={{flex: 1, flexDirection: 'row'}}>
+    <View style={{ flex: 1, flexDirection: 'row' }}>
       <Button
         onPress={() => {
           if (props.value > props.minValue) {
@@ -26,4 +27,12 @@ const NumericInput = props => {
     </View>
   );
 };
+
+NumericInput.propTypes = {
+  minValue: PropTypes.number,
+  maxValue: PropTypes.number,
+  value: PropTypes.number,
+  setValue: PropTypes.func,
+};
+
 export default NumericInput;

@@ -1,44 +1,38 @@
-import React, {Component} from 'react';
-import {ScrollView, Text, Dimensions} from 'react-native';
-
-import styles, {View} from './style';
-
+import React from 'react';
+import { ScrollView, Text, Dimensions } from 'react-native';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import PropTypes from 'prop-types';
+
+import styles, { View } from './style';
+
 import AppStyles from '../../config/styles';
 
-class SingleSlider extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <ScrollView scrollEnabled={true} contentContainerStyle={styles.container}>
-        <MultiSlider
-          sliderLength={0.8 * Dimensions.get('window').width}
-          values={this.props.data.values || [1000]}
-          min={this.props.data.min || 1000}
-          max={this.props.data.max || 10000}
-          selectedStyle={{
-            backgroundColor:
-              this.props.data.color || AppStyles.color.DEFAULT_ORANGE,
-          }}
-          customMarker={e => {
-            return (
-              <Marker
-                currentValue={e.currentValue}
-                color={this.props.data.color || AppStyles.color.DEFAULT_ORANGE}
-              />
-            );
-          }}
-          onValuesChangeFinish={finish => {
-            this.props.setValue(finish);
-          }}
-        />
-      </ScrollView>
-    );
-  }
-}
+const SingleSlider = props => {
+  return (
+    <ScrollView scrollEnabled={true} contentContainerStyle={styles.container}>
+      <MultiSlider
+        sliderLength={0.8 * Dimensions.get('window').width}
+        values={props.data.values || [1000]}
+        min={props.data.min || 1000}
+        max={props.data.max || 10000}
+        selectedStyle={{
+          backgroundColor: props.data.color || AppStyles.color.DEFAULT_ORANGE,
+        }}
+        customMarker={e => {
+          return (
+            <Marker
+              currentValue={e.currentValue}
+              color={props.data.color || AppStyles.color.DEFAULT_ORANGE}
+            />
+          );
+        }}
+        onValuesChangeFinish={finish => {
+          props.setValue(finish);
+        }}
+      />
+    </ScrollView>
+  );
+};
 
 const Marker = props => {
   return (
@@ -61,9 +55,19 @@ const Marker = props => {
           height: 6,
           marginVertical: 2,
         }}></View>
-      <View style={{...styles.marker, borderColor: props.color}}></View>
+      <View style={{ ...styles.marker, borderColor: props.color }}></View>
     </View>
   );
+};
+
+Marker.propTypes = {
+  currentValue: PropTypes.string,
+  color: PropTypes.string,
+};
+
+SingleSlider.propTypes = {
+  data: PropTypes.object,
+  setValue: PropTypes.func,
 };
 
 export default SingleSlider;

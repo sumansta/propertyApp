@@ -1,4 +1,4 @@
-import {createStackNavigator} from 'react-navigation-stack';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import HomeScreen from '../screens/Home';
 import DetailsScreenStack from './DetailsScreenStack';
@@ -11,7 +11,7 @@ const HomeScreenStack = createStackNavigator(
         header: null,
       },
     },
-    DetailsScreen: {screen: DetailsScreenStack},
+    DetailsScreen: { screen: DetailsScreenStack },
   },
   {
     initialRouteKey: HomeScreen,
