@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -42,6 +42,12 @@ export const EmptyContainer = styled.View`
   flex: 1;
   justify-content: space-around;
   align-content: center;
+`;
+
+export const GifContainer = styled.View`
+  height: 300;
+  width: 300;
+  align-self: center;
 `;
 
 export default styles;

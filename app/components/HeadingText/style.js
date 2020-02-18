@@ -1,6 +1,4 @@
-import styled from 'styled-components';
-
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import AppStyles from '../../config/styles';
 

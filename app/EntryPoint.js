@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {AsyncStorage} from 'react-native';
-import {Provider} from 'react-redux';
+import React, { Component } from 'react';
+import { AsyncStorage, Platform } from 'react-native';
+import { Provider } from 'react-redux';
 
-import {persistor, store} from './store/index';
-import {PersistGate} from 'redux-persist/integration/react';
+import { persistor, store } from './store/index';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import Navigator from './navigation';
 
@@ -36,6 +36,7 @@ class EntryPoint extends Component {
 
   async getToken() {
     let fcmToken = await AsyncStorage.getItem('fcmToken');
+
     if (!fcmToken) {
       fcmToken = await firebase.messaging().getToken();
       if (fcmToken) {
@@ -52,6 +53,7 @@ class EntryPoint extends Component {
     ).setDescription(
       'A Channel To manage the notifications related to Application',
     );
+
     firebase.notifications().android.createChannel(channel);
 
     this.notificationListener = firebase

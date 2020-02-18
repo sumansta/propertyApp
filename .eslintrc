@@ -1,0 +1,32 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true
+  },
+  "plugins": [ "react-native"],
+  "ecmaFeatures": {
+    "jsx": true
+  },
+  "extends": ["eslint:recommended", "eslint-config-leapfrog/react"],
+  "rules": {
+    "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}],
+    "require-jsdoc": [
+      "error",
+      {
+        "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": false,
+          "ClassDeclaration": false,
+          "ArrowFunctionExpression": false,
+          "FunctionExpression": false
+        }
+      }
+    ]
+  },
+  "globals": {
+    "GLOBAL": false,
+    "it": false,
+    "expect": false,
+    "describe": false
+  }
+}

@@ -1,14 +1,17 @@
-import React, {useState, useEffect, Component} from 'react';
-import {Image, ScrollView} from 'react-native';
-import {ProgressDialog} from 'react-native-simple-dialogs';
+import React, { useState, useEffect } from 'react';
+import { Image, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import firebase from 'react-native-firebase';
+import LotteView from 'lottie-react-native';
+import PropTypes from 'prop-types';
 
 import CircleButtons from '../../components/CircleButton';
 import PropertyButton from '../../components/PropertyButton';
 import PriceDetail from '../../components/PriceDetail';
+import MapView from '../../components/MapView';
 
 import AppStyles from '../../config/styles';
+import images from '../../config/images';
 
 import styles, {
   Container,
@@ -16,7 +19,7 @@ import styles, {
   DetailsContainer,
   ImageContainer,
   MapContainer,
-  MapView,
+  MapViewContainer,
   MapDetails,
   FeatureContainer,
   InfoContainer,
@@ -25,18 +28,19 @@ import styles, {
   View,
 } from './style';
 
-const Details = ({navigation}) => {
+const Details = ({ navigation }) => {
   const ref = firebase.firestore().collection('bestPicks');
   const [loading, setLoading] = useState(true);
   const [details, setDetails] = useState({});
   const [infoIcons] = useState([
-    {name: 'ios-bed', detail: '2 bed'},
-    {name: 'ios-home', detail: '2 bath'},
-    {name: 'ios-albums', detail: '2050 sqft'},
+    { name: 'ios-bed', detail: '2 bed' },
+    { name: 'ios-home', detail: '2 bath' },
+    { name: 'ios-albums', detail: '2050 sqft' },
   ]);
 
-  fetchData = async () => {
+  const fetchData = async () => {
     const id = navigation.getParam('id');
+
     await ref
       .doc(id)
       .get()
@@ -52,27 +56,31 @@ const Details = ({navigation}) => {
 
   return (
     <Container>
-      <ProgressDialog
-        visible={loading}
-        title="Loading"
-        message="Fetching data"
-      />
-      {!loading && details && (
+      {loading ? (
+        <View style={{ height: 150, width: 150 }}>
+          <LotteView source={images.loading} loop autoPlay />
+        </View>
+      ) : (
         <ScrollView nestedScrollEnabled={true}>
           <TopContainer>
             <ImageContainer
               onPress={() => {
-                navigation.navigate('CarouselScreen', {images: details.images});
+                navigation.navigate('CarouselScreen', {
+                  details: details.priceDetail,
+                  images: details.images,
+                });
               }}>
               <Image
-                source={{uri: details.imageURL}}
+                source={{ uri: details.imageURL }}
                 style={styles.image}
                 resizeMode="cover"
               />
             </ImageContainer>
 
             <MapContainer>
-              <MapView></MapView>
+              <MapViewContainer>
+                <MapView style={{ height: 120 }} />
+              </MapViewContainer>
               <MapDetails>
                 <PriceDetail detail={details.priceDetail} />
               </MapDetails>
@@ -102,13 +110,13 @@ const Details = ({navigation}) => {
                 return (
                   <InfoIcon
                     key={data.name}
-                    detail={{name: data.name, detail: data.detail}}
+                    detail={{ name: data.name, detail: data.detail }}
                   />
                 );
               })}
             </InfoContainer>
             <ScrollView showsVerticalScrollIndicator={false}>
-              <Text style={{paddingBottom: 64}}>{details.details}</Text>
+              <Text style={{ paddingBottom: 64 }}>{details.details}</Text>
             </ScrollView>
           </DetailsContainer>
           <ButtonsContainer>
@@ -145,15 +153,19 @@ const InfoIcon = props => {
         name={props.detail.name}
         size={16}
         color={AppStyles.color.NORMAL_TEXT_COLOR}></Icon>
-      <Text style={{fontWeight: 'bold', marginHorizontal: 8}}>
+      <Text style={{ fontWeight: 'bold', marginHorizontal: 8 }}>
         {props.detail.detail}
       </Text>
     </View>
   );
 };
 
-Details.navigationOptions = ({navigation}) => {
-  title: 'Home';
+InfoIcon.propTypes = {
+  detail: PropTypes.object,
+};
+
+Details.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default Details;

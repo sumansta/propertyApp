@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import AppStyles from '../../config/styles';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -13,6 +13,7 @@ export const Container = styled.View`
   flex: 1;
 `;
 export const View = styled.View``;
+export const RangeSlider = styled.TouchableOpacity``;
 
 export const ComponentContainer = styled.View`
   margin-vertical: 8px;

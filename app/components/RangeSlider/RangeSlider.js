@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {ScrollView, Text, Dimensions} from 'react-native';
+import React, { Component } from 'react';
+import { ScrollView, Text, Dimensions } from 'react-native';
 
-import styles, {View} from './style';
+import styles, { View } from './style';
 
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import AppStyles from '../../config/styles';
@@ -72,7 +72,7 @@ const Marker = props => {
           height: 6,
           marginVertical: 2,
         }}></View>
-      <View style={{...styles.marker, borderColor: props.color}}></View>
+      <View style={{ ...styles.marker, borderColor: props.color }}></View>
     </View>
   );
 };

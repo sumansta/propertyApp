@@ -1,13 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-import {TextInput} from './style';
+import { TextInput } from './style';
 
-export default class SimpleTextInput extends Component {
-  constructor(props) {
-    super(props);
-  }
+const SimpleTextInput = props => {
+  return <TextInput {...props} />;
+};
 
-  render() {
-    return <TextInput {...this.props} />;
-  }
-}
+export default SimpleTextInput;

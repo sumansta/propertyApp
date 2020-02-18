@@ -1,38 +1,41 @@
-import React, {useState, useEffect, useCallback} from 'react';
-import {View, Text, ScrollView} from 'react-native';
-import {connect} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { View, Text, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {ProgressDialog} from 'react-native-simple-dialogs';
+import { ProgressDialog } from 'react-native-simple-dialogs';
 import firebase from 'react-native-firebase';
 
-import {saveBestPicks, markFavourites} from '../../store/actions';
+import { saveBestPicks, markFavourites } from '../../store/actions';
 
 import CardView from '../../components/CardView';
 import FeatureButtons from '../../components/FeatureButtons';
 
-import ToastExample from '../../utils/CustomToast';
+import { CustomToast } from '../../utils/NativeModules';
 
-import styles, {Container} from './style';
+import styles, { Container } from './style';
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   const ref = firebase.firestore().collection('bestPicks');
   const [bestPicks, setBestPicks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const toggleFavourite = async ({id, favourite}) => {
-    let toastMessage = favourite
+  const toggleFavourite = async ({ id, favourite }) => {
+    const toastMessage = favourite
       ? 'Removed from favourites'
       : 'Added to Favourites';
-    ToastExample.show(toastMessage, ToastExample.SHORT);
-    await ref.doc(id).update({favourite: !favourite});
+
+    CustomToast.show(toastMessage, CustomToast.SHORT);
+    await ref.doc(id).update({ favourite: !favourite });
   };
 
   useEffect(() => {
     return ref.onSnapshot(querySnapshot => {
       const list = [];
+
       querySnapshot.forEach(doc => {
         const data = doc.data();
-        list.push({...data, id: doc.id});
+
+        list.push({ ...data, id: doc.id });
       });
       setLoading(false);
       setBestPicks(list);
@@ -63,7 +66,7 @@ const Home = ({navigation}) => {
                 showToast={() => {
                   toggleFavourite(item);
                 }}
-                image={{uri: item.imageURL}}
+                image={{ uri: item.imageURL }}
                 iconName={item.icon}
                 title={item.heading}
                 description={item.description}
@@ -74,11 +77,9 @@ const Home = ({navigation}) => {
             <FeatureButtons />
           </View>
           <Text style={styles.headingText}>Trending</Text>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            {/* <CardView iconName="ios-compass" image={images.image2} />
-              <CardView image={images.image3} />
-              <CardView iconName="ios-home" image={images.image4} /> */}
-          </ScrollView>
+          <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}></ScrollView>
         </Container>
       </ScrollView>
     </Container>
@@ -103,7 +104,4 @@ Home.propTypes = {
   navigation: PropTypes.object,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

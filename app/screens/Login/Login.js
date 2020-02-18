@@ -1,13 +1,16 @@
-import React, {Component} from 'react';
-import {Text} from 'react-native';
-import {connect} from 'react-redux';
-import {ProgressDialog} from 'react-native-simple-dialogs';
+import React, { Component } from 'react';
+import { Text } from 'react-native';
+import { connect } from 'react-redux';
+import { ProgressDialog } from 'react-native-simple-dialogs';
 import firebase from 'react-native-firebase';
+import PropTypes from 'prop-types';
 
-import ToastExample from '../../utils/CustomToast';
+import CustomToast from '../../utils/NativeModules';
 import SimpleButton from '../../components/SimpleButton';
 import LogoContainer from '../../components/LogoContainer';
 import SimpleTextInput from '../../components/SimpleTextInput';
+
+import { inputTypes, validate } from '../../utils/validator';
 
 import {
   Container,
@@ -15,7 +18,7 @@ import {
   RegisterContainer,
   HeadingText,
 } from './style';
-import {saveLogin} from '../../store/actions';
+import { saveLogin } from '../../store/actions';
 
 export class Login extends Component {
   constructor(props) {
@@ -37,9 +40,11 @@ export class Login extends Component {
   }
 
   handleLogin = () => {
-    this.setState({progressVisible: true});
-    const {email, password} = this.state;
-    if (email && email.length > 0 && password && password.length > 0) {
+    this.setState({ progressVisible: true });
+    const { email, password } = this.state;
+    const isValid = validate(email, inputTypes.email);
+
+    if (isValid) {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
@@ -48,12 +53,12 @@ export class Login extends Component {
           this.props.navigation.navigate('Dashboard');
         })
         .catch(err => {
-          ToastExample.show('Invalid Login', ToastExample.LONG);
-          this.setState({progressVisible: false, error: true});
+          CustomToast.show('Invalid Login', CustomToast.LONG);
+          this.setState({ progressVisible: false, error: true });
         });
     } else {
-      this.setState({progressVisible: false});
-      ToastExample.show('Empty Fields', ToastExample.LONG);
+      this.setState({ progressVisible: false });
+      CustomToast.show('Invalid Email', CustomToast.LONG);
     }
   };
   render() {
@@ -66,14 +71,14 @@ export class Login extends Component {
             placeholder="Email"
             textContentType={'emailAddress'}
             onChangeText={email => {
-              this.setState({email});
+              this.setState({ email });
             }}
           />
           <SimpleTextInput
             placeholder="Password"
             secureTextEntry={true}
             onChangeText={password => {
-              this.setState({password});
+              this.setState({ password });
             }}
           />
           <SimpleButton title="Login" onPress={this.handleLogin} />
@@ -106,7 +111,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Login);
+Login.propTypes = {
+  navigation: PropTypes.object,
+  saveLogin: PropTypes.func,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

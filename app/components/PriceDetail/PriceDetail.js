@@ -41,8 +41,9 @@ const IconContainer = props => (
   <SingleIcon>
     <Icon
       name={props.name}
-      style={{...styles.singleIcon, color: props.color}}></Icon>
+      style={{ ...styles.singleIcon, color: props.color }}></Icon>
     <IconText>{props.title}</IconText>
   </SingleIcon>
 );
+
 export default PriceDetail;

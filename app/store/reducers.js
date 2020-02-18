@@ -14,13 +14,13 @@ const INITIAL_STATE = {
 const rootReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SAVE_FAVOURITES:
-      return {...state, favourites: action.data};
+      return { ...state, favourites: action.data };
     case SAVE_BEST_PICKS:
-      return {...state, bestPicks: action.data};
+      return { ...state, bestPicks: action.data };
     case MARK_FAVOUTITES:
-      return {...state, favourites: action.data};
+      return { ...state, favourites: action.data };
     case SAVE_LOGIN:
-      return {...state, loggedIn: action.data};
+      return { ...state, loggedIn: action.data };
     default:
       return state;
   }
